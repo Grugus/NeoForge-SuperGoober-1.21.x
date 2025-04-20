@@ -16,6 +16,10 @@ public class ModDataAttachment {
             "needed_health", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build()
     );
 
+    public static final Supplier<AttachmentType<Integer>> POWER_LEVEL = ATTACHMENT_TYPES.register(
+            "power_level", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build()
+    );
+
 
 
 }

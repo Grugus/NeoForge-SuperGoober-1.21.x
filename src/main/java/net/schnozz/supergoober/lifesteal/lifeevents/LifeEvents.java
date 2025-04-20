@@ -42,7 +42,7 @@ public class LifeEvents {
             Player p = event.getEntity();
             p.getData(HEALTH_NEEDED);
             p.getAttribute(Attributes.MAX_HEALTH).addOrReplacePermanentModifier(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("goobermod", "lifestealer_maxhealth"),p.getData(HEALTH_NEEDED), AttributeModifier.Operation.ADD_VALUE)); // sets the modifier
-
+            p.setHealth(50);
         }
     }
 }
