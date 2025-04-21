@@ -20,6 +20,10 @@ public class ModDataAttachment {
             "power_level", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build()
     );
 
+    public static final Supplier<AttachmentType<Integer>> MOB_UNDER_COMMAND = ATTACHMENT_TYPES.register(
+            "mob_under_command", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build()
+    );
+
 
 
 }

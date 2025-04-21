@@ -67,6 +67,7 @@ public class GooberMod
         if(event.getTabKey() == CreativeModeTabs.COMBAT)
         {
             event.accept(ModItems.NECROROD);
+            event.accept(ModItems.MOBHOLDER);
         }
     }
 

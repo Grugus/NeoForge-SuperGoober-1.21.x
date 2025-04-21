@@ -12,7 +12,8 @@ public class ModItems {
 
     public static final DeferredItem<Item> NECROROD = (DeferredItem<Item>) ITEMS.register("necrorod",
             () -> new Item(new Item.Properties()));
-
+    public static final DeferredItem<Item> MOBHOLDER = (DeferredItem<Item>) ITEMS.register("mobholder",
+            () -> new Item(new Item.Properties()));
 
 
 

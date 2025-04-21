@@ -23,8 +23,9 @@ public class LifeEvents {
         if(event.getEntity() instanceof Player player && event.getSource().getDirectEntity() instanceof Player p && p.getTags().contains("lifestealer"))
         {
             p.getData(HEALTH_NEEDED);
-            p.getAttribute(Attributes.MAX_HEALTH).addOrReplacePermanentModifier(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("goobermod", "lifestealer_maxhealth"),Math.min((p.getData(HEALTH_NEEDED) + 4), 20), AttributeModifier.Operation.ADD_VALUE)); // sets the modifier
+            p.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(20 + Math.min((p.getData(HEALTH_NEEDED) + 4), 20));
             p.setData(HEALTH_NEEDED, Math.min((p.getData(HEALTH_NEEDED) + 4), 20)); //sets the tag on the player to the new health addition value
+            p.setHealth(50);
         }
 
         if(event.getEntity() instanceof Player p && event.getSource().getDirectEntity() instanceof Player player && p.getTags().contains("lifestealer"))
@@ -41,7 +42,7 @@ public class LifeEvents {
         {
             Player p = event.getEntity();
             p.getData(HEALTH_NEEDED);
-            p.getAttribute(Attributes.MAX_HEALTH).addOrReplacePermanentModifier(new AttributeModifier(ResourceLocation.fromNamespaceAndPath("goobermod", "lifestealer_maxhealth"),p.getData(HEALTH_NEEDED), AttributeModifier.Operation.ADD_VALUE)); // sets the modifier
+            p.getAttributes().getInstance(Attributes.MAX_HEALTH).setBaseValue(20 + p.getData(HEALTH_NEEDED));
             p.setHealth(50);
         }
     }
