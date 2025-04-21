@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.schnozz.supergoober.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "MonsterAIMixin"
+  ],
+  "client": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
