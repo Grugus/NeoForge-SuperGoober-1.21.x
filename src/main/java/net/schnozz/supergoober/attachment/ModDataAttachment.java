@@ -3,12 +3,14 @@ package net.schnozz.supergoober.attachment;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.attachment.IAttachmentSerializer;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.schnozz.supergoober.GooberMod;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -27,10 +29,18 @@ public class ModDataAttachment {
             "power_level", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).copyOnDeath().build()
     );
 
+    public static final Supplier<AttachmentType<Integer>> GROUP_NUMBER = ATTACHMENT_TYPES.register(
+            "group_number", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+
+    public static final Supplier<AttachmentType<Boolean>> IS_HOLDING = ATTACHMENT_TYPES.register(
+            "is_holding", () -> AttachmentType.builder(() -> false).serialize(Codec.BOOL).build()
+    );
 
     public static final Supplier<AttachmentType<UUID>> UNDER_CONTROL = ATTACHMENT_TYPES.register(
-            "under_control", () -> AttachmentType.builder(() -> UUID.randomUUID()).serialize(UUIDUtil.CODEC).build()
+            "under_control", () -> AttachmentType.builder(UUID::randomUUID).serialize(UUIDUtil.CODEC).build()
     );
+
 
 
 

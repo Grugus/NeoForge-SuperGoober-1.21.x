@@ -35,7 +35,7 @@ public class MobHolderItem extends Item {
         {
             CompoundTag tag = player.getData(COMMAND_STACK).pop();
             Monster newEntity = (Monster) EntityType.loadEntityRecursive(tag, level, (spawnedEntity) -> {
-                spawnedEntity.moveTo(pos,
+                spawnedEntity.moveTo(pos.above(2),
                         spawnedEntity.getYRot(), spawnedEntity.getXRot());
                 return spawnedEntity;
             });
@@ -44,7 +44,7 @@ public class MobHolderItem extends Item {
                 level.addFreshEntity(newEntity);
                 newEntity.targetSelector.getAvailableGoals().clear();
                 newEntity.setTarget(null);
-                newEntity.targetSelector.addGoal(2, new FollowPlayerGoal(newEntity, 1D, 5D, player.getUUID()));
+                newEntity.goalSelector.addGoal(2, new FollowPlayerGoal(newEntity, player.getUUID(), 1D));
                 player.getData(COMMAND_LIST).add(newEntity.getUUID());
             }
         }

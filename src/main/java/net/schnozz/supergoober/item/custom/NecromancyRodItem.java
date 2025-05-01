@@ -10,10 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RangedAttackGoal;
 import net.minecraft.world.entity.ai.goal.SwellGoal;
-import net.minecraft.world.entity.monster.Creeper;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.entity.monster.Skeleton;
-import net.minecraft.world.entity.monster.Zombie;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -40,15 +37,16 @@ public class NecromancyRodItem extends Item {
 
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity entity, InteractionHand hand) {
-        Level level = player.level();
+        Level level = entity.level();
         if(player.getTags().contains("Necromancer")) {
             if (level instanceof ServerLevel serverLevel) {
                 for (UUID controlled : player.getData(COMMAND_LIST)) {
                     Monster m = (Monster) serverLevel.getEntity(controlled);
-                    if(m instanceof Skeleton s)
+
+                    if(m.getMainHandItem().is(Items.BOW))
                     {
-                        s.setArrowCount(5000);
-                        s.targetSelector.addGoal(1, new RangedAttackGoal(s, 1, 2,20));
+                        m.setArrowCount(5000);
+                        m.targetSelector.addGoal(1, new RangedAttackGoal((RangedAttackMob) m, 1, 2,20));
                     }
                     else if(m instanceof Creeper c)
                     {

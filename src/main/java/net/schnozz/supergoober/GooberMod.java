@@ -1,8 +1,8 @@
 package net.schnozz.supergoober;
 
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.ItemLike;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.schnozz.supergoober.attachment.ModDataAttachment;
 import net.schnozz.supergoober.item.ModItems;
 import org.slf4j.Logger;
@@ -37,7 +37,6 @@ public class GooberMod
     {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
-
         ModItems.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
@@ -48,6 +47,8 @@ public class GooberMod
         ModDataAttachment.ATTACHMENT_TYPES.register(modEventBus);
 
         // Register the item to a creative tab
+
+
         modEventBus.addListener(this::addCreative);
 
 
@@ -60,6 +61,7 @@ public class GooberMod
     {
 
     }
+
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)

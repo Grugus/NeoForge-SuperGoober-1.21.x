@@ -57,7 +57,7 @@ public class NecromancerEvents {
 
 
         //if mob is able to be taken over by the necromancer then create a friendly mob in its place
-        if(entity instanceof Monster m && event.getSource().getDirectEntity() instanceof Player p && p.getTags().contains("Necromancer") && p.getData(COMMAND_LIST).size() < 10 && !event.getEntity().hasData(UNDER_CONTROL))
+        if(entity instanceof Monster m && event.getSource().getDirectEntity() instanceof Player p && p.getTags().contains("Necromancer") && p.getData(COMMAND_LIST).size() + p.getData(COMMAND_STACK).size() < 10 && !event.getEntity().hasData(UNDER_CONTROL))
         {
             EntityType<?> type = m.getType();
             if(level instanceof ServerLevel serverLevel) {
@@ -71,7 +71,11 @@ public class NecromancerEvents {
                         newLiving.getData(UNDER_CONTROL);//attaches data to monster
                         newLiving.targetSelector.removeAllGoals(goals -> true);
                         newLiving.setTarget(null);
-                        newLiving.targetSelector.addGoal(2, new FollowPlayerGoal(newLiving, 1D, 5D, p.getUUID()));
+                        if(m.getMainHandItem().is(Items.BOW))
+                        {
+                            newLiving.setItemInHand(newLiving.swingingArm, m.getMainHandItem());
+                        }
+                        newLiving.goalSelector.addGoal(2, new FollowPlayerGoal(newLiving, p.getUUID(), 1D));
                         List<UUID> list = p.getData(COMMAND_LIST);
                         list.add(newLiving.getUUID());
                         newLiving.setData(UNDER_CONTROL, p.getUUID());//if successfuly controlled
